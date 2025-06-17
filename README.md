@@ -3,8 +3,6 @@ INSERT INTO departments (name, description) VALUES ('Mathematics', 'Department o
 INSERT INTO departments (name, description) VALUES ('Physics', 'Department of Physics and Astronomy');
 INSERT INTO departments (name, description) VALUES ('Chemistry', 'Department of Chemistry and Biochemistry');
 
-
-
 INSERT INTO teachers (first_name, last_name, email, phone, department_id) VALUES('John', 'Smith', 'john.smith@university.edu', '+1-555-0101', 1);
 INSERT INTO teachers (first_name, last_name, email, phone, department_id) VALUES('Emily', 'Johnson', 'emily.johnson@university.edu', '+1-555-0102', 1);
 INSERT INTO teachers (first_name, last_name, email, phone, department_id) VALUES('Michael', 'Brown', 'michael.brown@university.edu', '+1-555-0103', 2);
@@ -34,4 +32,8 @@ INSERT INTO student_subjects (student_id, subject_id) VALUES(4, 4), (4, 5), (4, 
 INSERT INTO student_subjects (student_id, subject_id) VALUES(5, 1), (5, 2), (5, 3); -- Edward: CS101, CS201, CS301
 INSERT INTO student_subjects (student_id, subject_id) VALUES(6, 4),(6, 6),(6, 7); -- Fiona: MATH101, PHYS101, CHEM201
 
+//build the docker container
+docker build -t springboot-jpa-app .
 
+// run the docker container
+docker run -p 8080:8080 springboot-jpa-app
