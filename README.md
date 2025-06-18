@@ -37,3 +37,138 @@ docker build -t springboot-jpa-app .
 
 // run the docker container
 docker run -p 8080:8080 springboot-jpa-app
+
+10.1Build and Run Commands
+
+# Navigate to project directory
+cd student-management-system
+
+# Clean and build the project
+mvn clean compile
+
+# Run the application
+mvn spring-boot:run
+
+# Alternative: Build JAR and run
+mvn clean package
+java -jar target/student-management-system-1.0.0.jar
+
+10.2Testing Endpoints
+Department Endpoints:
+
+bash
+
+# Get all departments
+curl -X GET http://localhost:8080/api/departments
+
+# Get department by ID
+curl -X GET http://localhost:8080/api/departments/1
+
+# Create new department
+curl -X POST http://localhost:8080/api/departments \
+-H "Content-Type: application/json" \
+-d '{"name":"Biology","description":"Department of Biological Sciences"}'
+
+# Update department
+curl -X PUT http://localhost:8080/api/departments/1 \
+-H "Content-Type: application/json" \
+-d '{"name":"Computer Science","description":"Updated description"}'
+
+Student Endpoints:
+
+bash
+
+# Get all students
+curl -X GET http://localhost:8080/api/students
+
+# Get student with subjects
+curl -X GET http://localhost:8080/api/students/1/subjects
+
+# Create new student
+curl -X POST http://localhost:8080/api/students \
+-H "Content-Type: application/json" \
+-d '{
+"firstName":"John",
+"lastName":"Doe", "email":"john.doe@student.edu", "studentId":"STU007", "phone":"+1-555-1007"
+}'
+
+# Enroll student in subject
+curl -X POST http://localhost:8080/api/students/1/enroll/1
+
+Teacher Endpoints:
+
+bash
+
+# Get all teachers
+curl -X GET http://localhost:8080/api/teachers
+
+# Get teachers by department
+curl -X GET http://localhost:8080/api/teachers/department/1
+
+# Search teachers by name
+curl -X GET "http://localhost:8080/api/teachers/search?name=John"
+
+Subject Endpoints:
+
+# Get all subjects
+curl -X GET http://localhost:8080/api/subjects
+
+# Get subject with students
+curl -X GET http://localhost:8080/api/subjects/1/students
+
+# Get subjects by department
+curl -X GET http://localhost:8080/api/subjects/department/1
+
+10.3Accessing H2 Console
+1.Open browser and go to:
+2.Use these settings:
+ JDBC URL:
+ User Name:
+ Password:
+3.Click Connect to access the database
+
+10.4Actuator Endpoints
+
+bash
+
+# Health check
+curl -X GET http://localhost:8080/actuator/health
+
+# Application info
+curl -X GET http://localhost:8080/actuator/info
+
+# All endpoints
+curl -X GET http://localhost:8080/actuator
+
+# Metrics
+curl -X GET http://localhost:8080/actuator/metrics
+
+# Environment
+curl -X GET http://localhost:8080/actuator/env
+
+Relationship Summary
+The application implements the following relationships:
+
+1.Department ↔ Teacher: One-to-Many
+ One department can have many teachers  Each teacher belongs to one department
+2.Department ↔ Subject: One-to-Many
+ One department can offer many subjects  Each subject belongs to one department
+3.Teacher ↔ Subject: One-to-Many
+ One teacher can teach many subjects  Each subject is taught by one teacher
+4.Student ↔ Subject: Many-to-Many
+ One student can enroll in many subjects
+ One subject can have many students enrolled
+
+Key Features Implemented
+ ✅ Complete CRUD operations for all entities
+ ✅ Proper JPA relationships with cascade operations
+  ✅ Input validation using Bean Validation
+  ✅ Custom repository methods with JPQL queries
+ ✅ Service layer with transaction management
+  ✅ RESTful API endpoints with proper HTTP status codes
+ ✅ Global exception handling
+  ✅ H2 in-memory database with console access
+  ✅ Spring Boot Actuator for monitoring
+  ✅ Sample data initialization
+  ✅ Lazy loading optimization
+ ✅ Cross-origin resource sharing (CORS) support
