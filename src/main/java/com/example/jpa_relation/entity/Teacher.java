@@ -48,17 +48,20 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Subject> subjects;
+    @Column(name = "salary")
+    private double salary;
 
     // Default constructor
     public Teacher() {
     }
 
     // Constructor with firstName, lastName, email, and phone
-    public Teacher(String firstName, String lastName, String email, String phone) {
+    public Teacher(String firstName, String lastName, String email, String phone, double salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+        this.salary = salary;
     }
 
     // Getters and Setters
@@ -126,4 +129,13 @@ public class Teacher {
         subjects.add(subject);
         subject.setTeacher(this);
     }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
 }

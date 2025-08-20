@@ -51,7 +51,7 @@ public class TeacherService {
         teacher.setEmail(teacherDetails.getEmail());
         teacher.setPhone(teacherDetails.getPhone());
         teacher.setDepartment(teacherDetails.getDepartment());
-
+        teacher.setSalary(teacherDetails.getSalary());
         return teacherRepository.save(teacher);
     }
 
@@ -62,4 +62,9 @@ public class TeacherService {
     public Optional<Teacher> getTeacherWithSubjects(Long id) {
         return teacherRepository.findByIdWithSubjects(id);
     }
+
+    public Double findHighestSalary() {
+        return teacherRepository.findHighestSalary();
+    }
+
 }

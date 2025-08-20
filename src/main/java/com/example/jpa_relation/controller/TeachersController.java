@@ -88,4 +88,10 @@ public class TeachersController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/highest-salary")
+    public ResponseEntity<Double> getHighestSalary() {
+        double highestSalary = teacherService.findHighestSalary();
+        return ResponseEntity.ok(highestSalary);
+    }
 }
